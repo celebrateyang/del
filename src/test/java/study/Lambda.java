@@ -19,10 +19,12 @@ public class Lambda {
     List<Employee> emps = Arrays.asList(
         new Employee(101,"zhang",12,2345.23),
         new Employee(102,"xie",59,456.32),
+        new Employee(105,"aie",59,534.23),
         new Employee(103,"ma",32,87989.11),
         new Employee(104,"niao",23,4567.67)
     );
 
+    //按年龄降序,如果年龄相同,按姓名首字母升序
     @Test
     public void test01(){
         Collections.sort(emps,(e1,e2)->{
@@ -43,6 +45,8 @@ public class Lambda {
     public void testMeRe(){
         Comparator<Integer> com = (x,y)->Integer.compare(x,y);
         Comparator<Integer> com1 = Integer::compare;
+        int compare = com1.compare(4, 3);
+        System.out.println("compare=====>"+compare);
     }
 
     @Test

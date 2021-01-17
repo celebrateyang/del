@@ -3,13 +3,18 @@ services:
   del-app:
     image: celebrateyang/del
     environment:
-      - _JAVA_OPTIONS=-Xmx256m -Xms128m
+      - _JAVA_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5750 -Xmx256m -Xms128m
+      #- JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5750
       - SPRING_PROFILES_ACTIVE=prod,swagger
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
       - SPRING_DATASOURCE_URL=jdbc:mysql://del-mysql:3306/del?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USER=root
+      - SPRING_DATASOURCE_PASSWORD=delmoney329
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
     ports:
       - 8380:8080
+      - 5750:5750
+
   del-mysql:
     extends:
       file: mysql.yml
